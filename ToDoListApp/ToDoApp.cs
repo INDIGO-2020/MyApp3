@@ -18,7 +18,7 @@ namespace ToDoListApp
         public void Execute()
         {
             _manage.AddTask("Belajar B.Ingris", false);
-            _manage.AddTask("Test 2", true);
+            _manage.AddTask("Belajar Jalan Kaki", true);
 
             _manage.DisplayTask();
         }

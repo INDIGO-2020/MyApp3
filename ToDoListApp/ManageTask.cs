@@ -19,13 +19,16 @@ namespace ToDoListApp
         {
             var taskBaru = new ModelTask(judul, isTaskCompleted);
             taskManager.Add(taskBaru);
+
+            
         }
 
         public void DisplayTask()
         {
             foreach (var item in taskManager)
             {
-                Console.WriteLine($"{item.Id}. {item.Judul} selesai?{item.IsTaskCompleted}");
+                string status = item.IsTaskCompleted ? "Selesai" : "Belum";
+                Console.WriteLine($"{item.Id}. {item.Judul} Status: {status}");
             }
         }
     }
