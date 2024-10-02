@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace ToDoListApp
 {
     public class ManageTask
@@ -15,12 +10,30 @@ namespace ToDoListApp
            taskManager = new List<ModelTask>();
         }
 
-        public void AddTask(string judul, bool isTaskCompleted)
+        public void AddTask()
         {
-            var taskBaru = new ModelTask(judul, isTaskCompleted);
-            taskManager.Add(taskBaru);
+            string judul;
+            bool isTaskCompleted = false;
 
-            
+            Console.WriteLine("Task Baru\n");
+            Console.Write("Judul Kegitan: ");
+            string input = Console.ReadLine();
+
+            string[] separatedInput = input.Split(",");
+
+            if(separatedInput.Length == 1)
+            {
+                judul = separatedInput[0].Trim(); 
+
+                var taskBaru = new ModelTask(judul, isTaskCompleted);
+                taskManager.Add(taskBaru);
+            }
+            else
+            {
+                Console.WriteLine("Error");
+            }
+
+
         }
 
         public void DisplayTask()
