@@ -17,20 +17,23 @@ namespace ToDoListApp
 
             Console.WriteLine("Task Baru\n");
             Console.Write("Judul Kegitan: ");
-            string input = Console.ReadLine();
+            string? input = Console.ReadLine();
 
             string[] separatedInput = input.Split(",");
 
             if(separatedInput.Length == 1)
             {
-                judul = separatedInput[0].Trim(); 
+                judul = separatedInput[0].Trim();
+                if (!string.IsNullOrWhiteSpace(judul))
+                {
+                    var taskBaru = new ModelTask(judul, isTaskCompleted);
+                    taskManager.Add(taskBaru);
+                }
+                else
+                {
+                    Console.WriteLine("Judul tidak boleh Kosong!");
+                }
 
-                var taskBaru = new ModelTask(judul, isTaskCompleted);
-                taskManager.Add(taskBaru);
-            }
-            else
-            {
-                Console.WriteLine("Error");
             }
 
 
@@ -41,7 +44,7 @@ namespace ToDoListApp
             foreach (var item in taskManager)
             {
                 string status = item.IsTaskCompleted ? "Selesai" : "Belum";
-                Console.WriteLine($"{item.Id}. {item.Judul} Status: {status}");
+                Console.WriteLine($"{item.Id}. {item.Judul}; Status: {status}");
             }
         }
     }
