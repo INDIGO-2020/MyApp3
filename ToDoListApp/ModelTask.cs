@@ -8,7 +8,7 @@ namespace ToDoListApp
 {
     public class ModelTask
     {
-        private int _countId = 0;
+        private static int _countId = 0;
         public ModelTask(string judul, bool isTaskCompleted)
         {
             if (String.IsNullOrWhiteSpace(judul))
