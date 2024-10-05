@@ -75,7 +75,7 @@ namespace ToDoListApp
 
                     Console.Write("Pilih opsi: ");
                     // Ambil input user untuk opsi edit
-                    if(!int.TryParse(Console.ReadLine(), out option))
+                    if (!int.TryParse(Console.ReadLine(), out option))
                     {
                         Console.WriteLine("Input Invalid. Gunakan Number");
                         continue;
@@ -87,15 +87,21 @@ namespace ToDoListApp
                             Console.Write("Masukkan Judul baru atau Kosongkan bila jadi diubah: ");
                             string inputJudulBaru = Console.ReadLine();
 
+                            Console.Write("Kegiatan Selesai? (Y/N): ");
+                            string? inputStatusBaru = Console.ReadLine();
+
                             if (string.IsNullOrWhiteSpace(inputJudulBaru))
                             {
                                 Console.WriteLine("Judul tidak Diperbaharui");
+                                taskToEdit.IsTaskCompleted = changeStatus(inputStatusBaru);
                                 break;
                             }
                             else
                             {
                                 taskToEdit.Judul = inputJudulBaru;
                                 Console.WriteLine("Judul telah Diperbaharui!");
+                                taskToEdit.IsTaskCompleted = changeStatus(inputStatusBaru);
+
                                 break;
                             }
                         case 9:
@@ -111,6 +117,24 @@ namespace ToDoListApp
             else
             {
                 Console.WriteLine($"\nTugas dengan Id: {id} tidak ditemukan");
+            }
+        }
+
+        private bool changeStatus(string input)
+        {
+            switch (input.ToLower())
+            {
+                case "y":
+                    Console.WriteLine("Status Kegiatan telah Diubah");
+                    return true;
+
+                case "n":
+                    Console.WriteLine("Status Kegiatan Tidak Diubah");
+                    return false;
+
+                default:
+                    Console.WriteLine("Invalid Input. Status Tidak berubah");
+                    return false;
             }
         }
         public void DisplayTask()
