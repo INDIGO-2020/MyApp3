@@ -18,6 +18,8 @@ namespace ToDoListApp
                 new ModelTask("Belajar Membuka Pintu", true)
             };
         }
+
+        //TODO: add list
         public void AddTask()
         {
             string input;
@@ -56,6 +58,7 @@ namespace ToDoListApp
             } while (string.IsNullOrWhiteSpace(input));
         }
 
+        //TODO: Edit List
         public void EditTask(int id)
         {
             //inisialisasi dibawah ini merupakan implementasi dari LINQ(Language Integrated Query)
@@ -137,6 +140,23 @@ namespace ToDoListApp
                     return false;
             }
         }
+
+        //TODO: Delete List
+        public void DeleteTask(int id)
+        {
+            var TaskToDelete = taskManager.FirstOrDefault(t => t.Id == id);
+
+            if (TaskToDelete != null)
+            {
+                taskManager.Remove(TaskToDelete);
+                Console.WriteLine("Daftar Kegiatan berhasil dihapus");
+            }
+            else
+            {
+                Console.WriteLine($"Kegiatan dengan ID {id} tidak ditemukan!");
+            }
+        }
+        //TODO: Get list
         public void DisplayTask()
         {
             Console.WriteLine("\tList Tugas yang terdaftar");

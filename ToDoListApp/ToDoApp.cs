@@ -7,7 +7,6 @@ namespace ToDoListApp
     {
         private ManageTask _manage;
 
-        private static int editId;
         public ToDoApp()
         {
             _manage = new ManageTask();
@@ -22,7 +21,8 @@ namespace ToDoListApp
                 Console.WriteLine("Pilih Menu: ");
                 Console.WriteLine("1. Tambah Task");
                 Console.WriteLine("2. Edit Task");
-                Console.WriteLine("3. Daftar Task");
+                Console.WriteLine("3. Delete Task");
+                Console.WriteLine("4. Daftar Task");
                 Console.WriteLine("0. Exit Program");
                 Console.WriteLine("====================");
                 //if(!int.TryParse(Console.ReadKey(true).KeyChar.ToString(), out option)){
@@ -48,7 +48,7 @@ namespace ToDoListApp
                     case 2:
                         _manage.DisplayTask();
                         Console.Write("Masukkan Angka/Id Task yang akan diEdit: ");
-                        if (!int.TryParse(Console.ReadLine(), out editId))
+                        if (!int.TryParse(Console.ReadLine(), out int editId))
                         {
                             Console.WriteLine("Tidak ada Id tersebut");
                             Console.WriteLine("Kembali ke Menu Utama");
@@ -60,6 +60,22 @@ namespace ToDoListApp
                         }
                         break;
                     case 3:
+                        _manage.DisplayTask();
+                        Console.WriteLine("Masukkan Id yang akan dihapus: ");
+
+                        if(int.TryParse(Console.ReadLine(), out int deleteId))
+                        {
+                            _manage.DeleteTask(deleteId);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Kembali Ke Menu Utama");
+                            Console.ReadLine();
+                        }
+
+                        Console.Clear();
+                        break;
+                    case 4:
                         _manage.DisplayTask();
                         Console.ReadLine();
 
