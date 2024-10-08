@@ -40,7 +40,6 @@ namespace ToDoListApp
                 {
                     case 1:
                         _manage.AddTask();
-                        Console.WriteLine("Judul Kegiatan telah Ditambahkan!");
                         Console.ReadLine();
 
                         Console.Clear();

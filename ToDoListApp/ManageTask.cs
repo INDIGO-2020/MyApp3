@@ -24,11 +24,13 @@ namespace ToDoListApp
         {
             string input;
             bool isTaskCompleted = false;
+            string judul;
+            int invalidInput = 0;
+            const int maxInvalid = 2;
+
 
             do
             {
-                string judul;
-
                 Console.WriteLine("Task Baru\n");
                 Console.Write("Judul Kegitan: ");
                 input = Console.ReadLine();
@@ -42,10 +44,16 @@ namespace ToDoListApp
                     {
                         var taskBaru = new ModelTask(judul, isTaskCompleted);
                         taskManager.Add(taskBaru);
+                        Console.WriteLine("Judul Kegiatan telah Ditambahkan!");
                     }
                     else
                     {
                         Console.WriteLine("Judul tidak boleh Kosong!");
+                        invalidInput++;
+                        if(invalidInput >= maxInvalid)
+                        {
+                            return;
+                        }
 
                         /*
                          * DIBAWAH INI MERUPAKAN TRIAL UNTUK MENGHAPUS BEBERAPA BARIS.
@@ -92,18 +100,19 @@ namespace ToDoListApp
 
                             Console.Write("Kegiatan Selesai? (Y/N): ");
                             string? inputStatusBaru = Console.ReadLine();
+                            bool currentStatus = taskToEdit.IsTaskCompleted;
 
                             if (string.IsNullOrWhiteSpace(inputJudulBaru))
                             {
                                 Console.WriteLine("Judul tidak Diperbaharui");
-                                taskToEdit.IsTaskCompleted = changeStatus(inputStatusBaru);
+                                taskToEdit.IsTaskCompleted = changeStatus(inputStatusBaru, currentStatus);
                                 break;
                             }
                             else
                             {
                                 taskToEdit.Judul = inputJudulBaru;
                                 Console.WriteLine("Judul telah Diperbaharui!");
-                                taskToEdit.IsTaskCompleted = changeStatus(inputStatusBaru);
+                                taskToEdit.IsTaskCompleted = changeStatus(inputStatusBaru, currentStatus);
 
                                 break;
                             }
@@ -123,22 +132,54 @@ namespace ToDoListApp
             }
         }
 
-        private bool changeStatus(string input)
+        private static bool changeStatus(string input, bool currentStatus)
         {
-            switch (input.ToLower())
+            if (input.ToLower() == "y" && !currentStatus) //input = y + true == true
             {
-                case "y":
-                    Console.WriteLine("Status Kegiatan telah Diubah");
-                    return true;
-
-                case "n":
-                    Console.WriteLine("Status Kegiatan Tidak Diubah");
-                    return false;
-
-                default:
-                    Console.WriteLine("Invalid Input. Status Tidak berubah");
-                    return false;
+                Console.WriteLine("Status telah di Update menjadi Selesai");
+                return true;
             }
+            else if (input.ToLower() == "y" && currentStatus)
+            {
+                Console.WriteLine("Tidak ada Perubahan pada Status Kegiatan");
+                return currentStatus;
+            }
+
+
+            if (input.ToLower() == "n" && !currentStatus) //input = n + false == false
+            {
+                Console.WriteLine("Tidak ada perubahan pada Status Kegiatan");
+                return false;
+            }
+            else if (input.ToLower() == "n" && currentStatus) //input = n + true == ?
+            {
+                Console.Write("Anda yakin akan merubah Status kegiatan kembali menjadi Belum? (Y/N): ");
+                char confirmRevertStatus = char.Parse(Console.ReadLine().ToLower());
+
+                if (confirmRevertStatus == 'y') //cek changing bool == true (menjadi belum)
+                {
+                    Console.WriteLine("Status Kegiatan telah Kembali menjadi Belum");
+                    return false;
+                }
+                else if (confirmRevertStatus == 'n')
+                {
+                    Console.WriteLine("Status kegiatan tidak berubah");
+                    return currentStatus;
+                }
+                else
+                {
+                    Console.WriteLine("Input Invalid. Hanya ada 2 pilihan: (Y/N)");
+                }
+
+                return currentStatus;
+            }
+
+            else
+            {
+                Console.WriteLine("Input Invalid. Tolong pilih antara (Y/N)");
+                return currentStatus;
+            }
+
         }
 
         //TODO: Delete List
