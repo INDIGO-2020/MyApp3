@@ -1,4 +1,6 @@
 ﻿
+using System.Data;
+
 namespace ToDoListApp
 {
     public class ManageTask
@@ -50,8 +52,9 @@ namespace ToDoListApp
                     {
                         Console.WriteLine("Judul tidak boleh Kosong!");
                         invalidInput++;
-                        if(invalidInput >= maxInvalid)
+                        if (invalidInput >= maxInvalid)
                         {
+                            Console.Write("Kembali Ke Menu Utama");
                             return;
                         }
 
@@ -105,14 +108,14 @@ namespace ToDoListApp
                             if (string.IsNullOrWhiteSpace(inputJudulBaru))
                             {
                                 Console.WriteLine("Judul tidak Diperbaharui");
-                                taskToEdit.IsTaskCompleted = changeStatus(inputStatusBaru, currentStatus);
+                                taskToEdit.IsTaskCompleted = UpdateStatus(inputStatusBaru, currentStatus);
                                 break;
                             }
                             else
                             {
                                 taskToEdit.Judul = inputJudulBaru;
                                 Console.WriteLine("Judul telah Diperbaharui!");
-                                taskToEdit.IsTaskCompleted = changeStatus(inputStatusBaru, currentStatus);
+                                taskToEdit.IsTaskCompleted = UpdateStatus(inputStatusBaru, currentStatus);
 
                                 break;
                             }
@@ -132,7 +135,7 @@ namespace ToDoListApp
             }
         }
 
-        private static bool changeStatus(string input, bool currentStatus)
+        private static bool UpdateStatus(string input, bool currentStatus)
         {
             if (input.ToLower() == "y" && !currentStatus) //input = y + true == true
             {
@@ -191,11 +194,14 @@ namespace ToDoListApp
             {
                 taskManager.Remove(TaskToDelete);
                 Console.WriteLine("Daftar Kegiatan berhasil dihapus");
+                Console.ReadLine();
             }
             else
             {
                 Console.WriteLine($"Kegiatan dengan ID {id} tidak ditemukan!");
+                Console.ReadLine();
             }
+
         }
         //TODO: Get list
         public void DisplayTask()

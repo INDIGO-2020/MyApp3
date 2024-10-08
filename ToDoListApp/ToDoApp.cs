@@ -60,7 +60,7 @@ namespace ToDoListApp
                         break;
                     case 3:
                         _manage.DisplayTask();
-                        Console.WriteLine("Masukkan Id yang akan dihapus: ");
+                        Console.Write("Masukkan Id yang akan dihapus: ");
 
                         if(int.TryParse(Console.ReadLine(), out int deleteId))
                         {
