@@ -4,11 +4,11 @@
 Aplikasi To-Do List ini berbasis Console dengan fitur yang tersedia seperti Tambah, Edit, Hapus, dan Lihat Data.
 
 ## Features
-- Add new tasks
-- Edit existing tasks
-- Delete tasks
-- View all tasks
-- Mark tasks as completed
+- Tambah Kegiatan Baru
+- Edit Kegiatan yang telah Terdaftar
+- Hapus Kegiatan
+- Lihat Daftar Kegiatan
+- Menandai Kegiatan telah Selesai/Belum
 
 ## Prerequisites
 - .NET SDK version 8.0 or later
@@ -16,5 +16,14 @@ Aplikasi To-Do List ini berbasis Console dengan fitur yang tersedia seperti Tamb
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/INDIGO-2020/todolistapp.git
+   git clone https://github.com/INDIGO-2020/ToDoListApp_v1.0.git
+
+2. Navigate to this Directory
+   ```powershell
+   cd ToDoListApp
+   
+3. Run Command
+   ```powershell
+   dotnet run
+
 
