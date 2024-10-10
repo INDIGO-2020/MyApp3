@@ -21,8 +21,12 @@ Aplikasi To-Do List ini berbasis Console dengan fitur yang tersedia seperti Tamb
 2. Navigate to this Directory
    ```powershell
    cd ToDoListApp
+
+3. Build Project terlebih dahulu
+   ```powershell
+   dotnet build
    
-3. Run Command
+4. Kemudian Run Project
    ```powershell
    dotnet run
 
